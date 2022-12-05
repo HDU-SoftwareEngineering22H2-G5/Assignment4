@@ -151,6 +151,11 @@ class prompt():
             passwd = input('Please input your password\n>> ')
             self.UserList.make_user(cls, name, passwd)  # 此处未作成功性检查
             
+        else:
+            print('Sign in here\n')
+            name = input('Please input your name\n>> ')
+            passwd = input('Please input your password here\n>> ')
+            
 
 
 if __name__ == '__main__':
