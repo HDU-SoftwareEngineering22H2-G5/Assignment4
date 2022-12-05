@@ -45,12 +45,12 @@ class UserList():
             name (str): 用户名称
             passwd (str): 密码
         """
-        for account in self.account_list:
+        for account in self.account_list:   # 账号唯一性检查
             if account.name is name:
                 print('This account is already existed.\n')
                 return
             
-        self.account_list.append(eval(cls)(name, passwd))   # 此处未作账号唯一性检查
+        self.account_list.append(eval(cls)(name, passwd))
         print('Successfully sign up.\n')
         
     def list(self):
