@@ -41,12 +41,17 @@ class UserList():
         """建立新账号
 
         Args:
-            cls (0/1): 用户组, 普通用户或管理员
+            cls (SuperUser/NormalUser): 用户组, 普通用户或管理员
             name (str): 用户名称
             passwd (str): 密码
         """
+        for account in self.account_list:
+            if account.name is name:
+                print('This account is already existed.\n')
+                return
+            
         self.account_list.append(eval(cls)(name, passwd))   # 此处未作账号唯一性检查
-        print('successfully sign up.\n')
+        print('Successfully sign up.\n')
         
     def list(self):
         """列出所有账户
@@ -68,7 +73,7 @@ class UserList():
         """
         for account in self.account_list:
             if name is account.name and passwd is account.passwd:
-                print('Successfully sign in!\n Your name is {}.\n You are a {}.\n'.format(account.name, 
+                print('Successfully sign in!\nYour name is {}.\nYou are a {}.\n'.format(account.name, 
                       'Superuser' if account.permission == 1 else 'Normaluser'))
                 return account
             
@@ -105,6 +110,7 @@ class ContentList():
     
 if __name__ == '__main__':
     List = UserList()
+    List.make_user('SuperUser', 'modas', '123456')
     List.make_user('SuperUser', 'modas', '123456')
     acc = List.login('modas', '123456')
 
