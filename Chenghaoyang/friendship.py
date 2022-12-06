@@ -139,22 +139,32 @@ class prompt():
     def __init__(self):
         self.UserList = UserList()
         print('Welcome! please sign in or sign up\n')
-        
-        c = input('Input 1 to sign up or input 2 to sign in\n>> ')
+        # 开始注册和登录
+        c = input('Input 1 to sign up or input 2 to log in\n>> ')
         while c != '1' and c != '2':
             c = input('Wrong input, please try again.\n>> ')
-            
-        if c is '1':
+    
+        if c == '1':
             print('Sign up now.\n')
             cls = input('Please input your permission\n>> ')
             name = input('Please input your name\n>> ')
             passwd = input('Please input your password\n>> ')
             self.UserList.make_user(cls, name, passwd)  # 此处未作成功性检查
-            
-        else:
-            print('Sign in here\n')
+            self.account = self.UserList.login(name, passwd)
+        elif c == '2':
+            print('Log in now.\n')
             name = input('Please input your name\n>> ')
-            passwd = input('Please input your password here\n>> ')
+            passwd = input('Please input your password\n>> ')
+            self.account = self.UserList.login(name, passwd)
+
+        # 以下开始正式交互
+        print('Input "show" to show content list, \nInput "publish" to publish a content\nInput "like + no." to like a content\nInput "exit" to exit\n')
+
+        while 1:
+            command = input('>> ')
+            if (command == 'exit'):
+                print('Bye!\n')
+                return
             
 
 
