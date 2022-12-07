@@ -206,9 +206,7 @@ class User {
     }
 }
 interface Observer {
-    boolean listen(int x);
-    boolean remindAll();
-    boolean remind(int x);
+    boolean remind();
 }
 class Agency {
     private boolean hasSubAccount(int x) {
@@ -263,5 +261,46 @@ class Agency {
             result = false;
         }
         return result;
+    }
+}
+class globalContext {
+    private subscriptionContext subContext = subscriptionContext.getInstance();
+    public subscriptionContext getContext() {
+        return subContext;
+    }
+}
+class subscriptionContext {
+    private static class subscriptionContextHolder {
+        private static subscriptionContext instance = new subscriptionContext();
+    }
+    private subscriptionContext() {}
+    public static subscriptionContext getInstance() {
+        return subscriptionContextHolder.instance;
+    }
+
+    private Vector<IDHolder> accountList;
+    
+}
+abstract class IDHolder{
+    public Integer ID;
+}
+class subscriptionAccount extends IDHolder implements Observer{
+    private Vector<String> articleList;
+    public Integer ID;
+    public Date createDate;
+    public String Name;
+    public subscriptionAccount(Integer id, Date date, String name) {
+        this.ID = id; this.createDate = date; this.Name = name;
+    }
+    public subscriptionAccount(int id, String name) {
+        this.ID = new Integer(id); this.createDate = new Date(); this.Name = name;
+    }
+    public subscriptionAccount(Integer id, String name) {
+        this.ID = id; this.createDate = new Date(); this.Name = name;
+    }
+    @Override
+    public boolean remind() {
+        System.out.println("用户订阅的公众号 ID：" + ID.toString() + "有新的推文。");
+        return true;
     }
 }
