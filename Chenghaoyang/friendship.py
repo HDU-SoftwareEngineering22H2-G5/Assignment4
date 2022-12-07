@@ -162,7 +162,7 @@ class prompt():
 
         while 1:
             command = input('>> ')
-            if (command == 'exit'):
+            if command == 'exit':
                 print('Bye!\n')
                 return
             
