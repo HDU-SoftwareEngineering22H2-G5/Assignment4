@@ -131,9 +131,28 @@ class MediaContent(ContentFactory):
 
 
 class ContentList():
+    def __init__(self):
+        """建立内容列表
+        """
+        self.content_list = []
+        
     def make_content():
         pass
 
+class observer():
+    """建立观察者以通知用户朋友圈列表的改变
+    """
+    def __init__(self):
+        self.actions = []
+        
+    @classmethod
+    def attach(cls, action):
+        cls.actions.append(action)
+
+    @classmethod
+    def notify(cls):
+        for action in cls.actions:
+            action()
 
 class prompt():
     def __init__(self):
@@ -166,6 +185,12 @@ class prompt():
                 print('Bye!\n')
                 return
             
+            if command == 'show':
+                pass
+            elif command == 'publish':
+                pass
+            elif command == 'like':
+                pass
 
 
 if __name__ == '__main__':
