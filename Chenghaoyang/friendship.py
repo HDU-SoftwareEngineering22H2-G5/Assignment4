@@ -100,7 +100,7 @@ class NormaContent(ContentFactory):
     一般内容
     """
 
-    def __init__(self, user, text):
+    def __init__(self, user, text, annex):
         """生成普通内容
 
         Args:
@@ -109,6 +109,7 @@ class NormaContent(ContentFactory):
         """
         self.user = user
         self.text = text
+        self.annex = 'null'
 
 
 class MediaContent(ContentFactory):
@@ -127,7 +128,6 @@ class MediaContent(ContentFactory):
         self.user = user
         self.text = text
         self.annex = annex
-        
 
 
 class ContentList():
@@ -135,16 +135,24 @@ class ContentList():
         """建立内容列表
         """
         self.content_list = []
-        
-    def make_content():
+
+    def make_content(self, user, cls, text, annex):
         pass
+
+    def list(self):
+        i = 0
+        for content in self.content_list:
+            print(i, 'user: {}\ncontent: {}\nannex: {}\n'.format(
+                content.user, content.text, content.annex))
+
 
 class observer():
     """建立观察者以通知用户朋友圈列表的改变
     """
+
     def __init__(self):
         self.actions = []
-        
+
     @classmethod
     def attach(cls, action):
         cls.actions.append(action)
@@ -154,6 +162,7 @@ class observer():
         for action in cls.actions:
             action()
 
+
 class prompt():
     def __init__(self):
         self.UserList = UserList()
@@ -162,7 +171,7 @@ class prompt():
         c = input('Input 1 to sign up or input 2 to log in\n>> ')
         while c != '1' and c != '2':
             c = input('Wrong input, please try again.\n>> ')
-    
+
         if c == '1':
             print('Sign up now.\n')
             cls = input('Please input your permission\n>> ')
@@ -184,7 +193,7 @@ class prompt():
             if command == 'exit':
                 print('Bye!\n')
                 return
-            
+
             if command == 'show':
                 pass
             elif command == 'publish':
