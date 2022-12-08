@@ -95,7 +95,7 @@ class ContentFactory(metaclass=ABCMeta):
         pass
 
 
-class NormaContent(ContentFactory):
+class NormalContent(ContentFactory):
     """
     一般内容
     """
@@ -145,6 +145,13 @@ class ContentList():
             print(i, 'user: {}\ncontent: {}\nannex: {}\n'.format(
                 content.user, content.text, content.annex))
 
+    def publish(self, account):
+        text = input('Please input content\n>> ')
+        annex = input('Please input annex\n>> ')
+        cls = 'MediaContent'
+        self.content_list.append(eval(cls)(account, text, annex))
+        print("Successfully Published\n")
+
 
 class observer():
     """建立观察者以通知用户朋友圈列表的改变
@@ -187,7 +194,7 @@ class prompt():
 
         # 以下开始正式交互
         print('Input "show" to show content list, \nInput "publish" to publish a content\nInput "like + no." to like a content\nInput "exit" to exit\n')
-
+        self.ContentList = ContentList()
         while 1:
             command = input('>> ')
             if command == 'exit':
@@ -195,9 +202,9 @@ class prompt():
                 return
 
             if command == 'show':
-                pass
+                self.ContentList.list()
             elif command == 'publish':
-                pass
+                self.ContentList.publish(self.account)
             elif command == 'like':
                 pass
 
