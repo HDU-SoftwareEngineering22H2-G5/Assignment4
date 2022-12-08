@@ -2,6 +2,10 @@ package HDU_SE.Manziqi;
 
 import java.util.*;
 
+import javax.naming.spi.DirStateFactory.Result;
+
+import javafx.scene.control.TreeCellBuilder;
+
 public class subSystemMainPrompt {
     private User user = new User();
     private Agency agency = new Agency();
@@ -278,8 +282,54 @@ class subscriptionContext {
         return subscriptionContextHolder.instance;
     }
 
-    private Vector<IDHolder> accountList;
+    private Vector<subscriptionAccount> accountList;
     
+    public subscriptionAccount getAccountById(int x) {
+        subscriptionAccount result = null;
+        Integer integer = new Integer(x);
+        Iterator<subscriptionAccount> iterator = accountList.iterator();
+        while(iterator.hasNext()) {
+            if(iterator.next().ID == integer) {
+                result = iterator.next();
+                break;
+            }
+        }
+        return result;
+    }
+    public boolean hasSubAccount(int x) {
+        boolean result = false;
+        Integer integer = new Integer(x);
+        Iterator<subscriptionAccount> iterator = accountList.iterator();
+        while(iterator.hasNext()) {
+            IDHolder idHolder = iterator.next();
+            if(idHolder.ID == integer) {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
+    public boolean createAccount(int x, String accName) {
+        boolean result = false;
+        if(!this.hasSubAccount(x)) {
+            subscriptionAccount account = new subscriptionAccount(x, accName);
+            accountList.add(account);
+            result = true;
+        } else {
+            result = false;
+        }
+        return result;
+    }
+    public boolean deleteAccount(int x) {
+        boolean result = false;
+        if(this.hasSubAccount(x)) {
+            accountList.remove(getAccountById(x));
+            result = true;
+        } else {
+            result = false;
+        }
+        return result;
+    }
 }
 abstract class IDHolder{
     public Integer ID;
@@ -302,5 +352,30 @@ class subscriptionAccount extends IDHolder implements Observer{
     public boolean remind() {
         System.out.println("用户订阅的公众号 ID：" + ID.toString() + "有新的推文。");
         return true;
+    }
+    public boolean addArticle(String artName) {
+        boolean result = false;
+        if(!this.hasArticle(artName)) {
+            articleList.add(artName);
+            result = true;
+        } else {
+            System.out.println("已有此文章！");
+            result = false;
+        }
+        return result;
+    }
+    public boolean deleteArticle(String artName) {
+        boolean result = false;
+        if(this.hasArticle(artName)) {
+            articleList.remove(artName);
+            result = true;
+        } else {
+            System.out.println("无此文章！");
+            result = false;
+        }
+        return result;
+    }
+    public boolean hasArticle(String artName) {
+        return articleList.contains(artName);
     }
 }
