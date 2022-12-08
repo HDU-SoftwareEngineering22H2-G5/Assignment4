@@ -401,6 +401,7 @@ class subscriptionContext {
                     return sa1.ID.intValue() - sa2.ID.intValue();
                 }
             });
+            System.out.println("公众号创建成功.");
             result = true;
         } else {
             result = false;
@@ -412,6 +413,7 @@ class subscriptionContext {
         if(this.hasSubAccount(x)) {
             this.getAccountById(x).changeState(false);
             result = true;
+            System.out.println("公众号已停用.");
         } else {
             result = false;
         }
@@ -421,7 +423,7 @@ class subscriptionContext {
 interface Observer {
     boolean listen();
     boolean unlisten();
-    boolean remind();
+    boolean remind(String x);
 }
 class subscriptionAccount implements Observer{
     private Vector<String> articleList;
@@ -449,9 +451,9 @@ class subscriptionAccount implements Observer{
         this.ID = id; this.createDate = new Date(); 
     }
     @Override
-    public boolean remind() {
+    public boolean remind(String artName) {
         if(this.onObserve)
-            System.out.println("用户订阅的公众号 ID:" + ID.toString() + "有新的推文。");
+            System.out.println("用户订阅的公众号 ID: " + ID.toString() + " 有新的推文: " + artName + ".");
         return true;
     }
     @Override
@@ -471,7 +473,8 @@ class subscriptionAccount implements Observer{
         boolean result = false;
         if(!this.hasArticle(artName) && this.getState()) {
             articleList.add(artName);
-            this.remind();
+            System.out.println("推文添加成功.");
+            this.remind(artName);
             result = true;
         } else {
             System.out.println("推文添加失败!");
@@ -483,6 +486,7 @@ class subscriptionAccount implements Observer{
         boolean result = false;
         if(this.hasArticle(artName)) {
             articleList.remove(artName);
+            System.out.println("推文删除成功.");
             result = true;
         } else {
             System.out.println("无此推文!");
@@ -502,7 +506,7 @@ class subscriptionAccount implements Observer{
         if(this.onActive) {
             System.out.println("公众号名称: " + Name);
             System.out.println("创建日期: " + createDate.toString());
-            System.out.println("推文列表:");;
+            System.out.println("推文列表:");
             Iterator<String> iterator = articleList.iterator();
             while(iterator.hasNext()) {
                 String string = iterator.next();
