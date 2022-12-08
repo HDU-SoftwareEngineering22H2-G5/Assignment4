@@ -243,7 +243,7 @@ class User {
     }
     public boolean addSubscriptionAccount(int x) {
         boolean result = false;
-        Integer i = new Integer(x);
+        Integer i = x;
         if(this.hasSubAccount(x) && 
             !subscriptionList.contains(i) && 
                 this.getAccountState(x)) {
@@ -260,7 +260,7 @@ class User {
     }
     public boolean deleteSubscriptionAccount(int x) {
         boolean result = false;
-        Integer i = new Integer(x);
+        Integer i = x;
         if(subscriptionList.contains(i)) {
             subscriptionList.remove(i);
             subscriptionOperator.getInstance().deleteUserFromAccount(x);
@@ -366,7 +366,7 @@ class subscriptionContext {
 
     public subscriptionAccount getAccountById(int x) {
         subscriptionAccount result = null;
-        Integer integer = new Integer(x);
+        Integer integer = x;
         Iterator<subscriptionAccount> iterator = accountList.iterator();
         while(iterator.hasNext()) {
             subscriptionAccount account = iterator.next();
@@ -379,7 +379,7 @@ class subscriptionContext {
     }
     public boolean hasSubAccount(int x) {
         boolean result = false;
-        Integer integer = new Integer(x);
+        Integer integer = x;
         Iterator<subscriptionAccount> iterator = accountList.iterator();
         while(iterator.hasNext()) {
             subscriptionAccount account = iterator.next();
@@ -444,7 +444,7 @@ class subscriptionAccount implements Observer{
     }
     public subscriptionAccount(int id, String name) {
         this(name);
-        this.ID = new Integer(id); this.createDate = new Date(); 
+        this.ID = id; this.createDate = new Date(); 
     }
     public subscriptionAccount(Integer id, String name) {
         this(name);
