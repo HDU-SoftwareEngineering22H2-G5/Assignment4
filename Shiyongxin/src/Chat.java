@@ -38,7 +38,6 @@ public class Chat {
                 System.out.println("退出程序成功");
                 break;
             }
-            in.close();
         }
 
 
@@ -92,7 +91,6 @@ public class Chat {
                 break;
             }
         }
-        in.close();
     }
     public void friend() {
         System.out.println("会话列表");
@@ -125,7 +123,6 @@ public class Chat {
                 break;
             }
         }
-        in.close();
     }
     public void contact(){
         Scanner in = new Scanner(System.in);
@@ -215,6 +212,5 @@ public class Chat {
                 break;
             }
         }
-        in.close();
     }
 }

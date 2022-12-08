@@ -27,16 +27,17 @@ public class weChatSystem {
             System.out.println("5. 公众号");
             System.out.println("按0退出");
             x = scan.next();
-            if(x == "1") {
+            if(x.equals("1")) {
                 ChatmainPrompt.main();
-            } else if(x == "2") {
+            } else if(x.equals("2")) {
                 PaymainPrompt.PayMain();
-            } else if(x == "3") {
-            } else if(x == "4") {
+            } else if(x.equals("3")) {
+                
+            } else if(x.equals("4")) {
                 personalDemo.main();
-            } else if(x == "5") {
+            } else if(x.equals("5")) {
                 SubmainPrompt.promptMain();
-            } else if(x == "0") {
+            } else if(x.equals("0")) {
                 break;
             } else {
                 System.out.println("输入错误!");
