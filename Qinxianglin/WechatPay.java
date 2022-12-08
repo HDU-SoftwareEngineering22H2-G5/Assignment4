@@ -729,7 +729,7 @@ class getIsBind{
     public void change(int s, String bankType){
         FileWriter fw = null;
         try{
-            fw = new FileWriter("./src/wechatPay/"+bankType+".txt",false);
+            fw = new FileWriter("./"+bankType+".txt",false);
             fw.write(s);
             fw.close();
         }
@@ -741,7 +741,10 @@ class getIsBind{
         File file = null;
         FileReader reader = null;
         try {
-            file = new File("./src/wechatPay/"+bankType+".txt");
+            file = new File("./"+bankType+".txt");
+            if(!file.exists()) {
+                change(0, bankType);
+            }
             reader = new FileReader(file);
             return reader.read();
         } catch (Exception e) {
