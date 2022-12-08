@@ -1,3 +1,5 @@
+package Assignment4.Shiyongxin.src;
+
 import java.util.Scanner;
 
 public class FWindows implements Windows{
@@ -29,11 +31,13 @@ public class FWindows implements Windows{
         if (!friendPool.exist(id))
         {
             System.out.println("该用户不存在");
+            in.close();
             return;
         }
         else if (!friend.exist(id))
         {
             System.out.println("与该用户不是好友关系");
+            in.close();
             return;
         }
 
@@ -43,6 +47,7 @@ public class FWindows implements Windows{
         }
         arr[0] = id;
         this.openWindows(sendID, id);
+        in.close();
     };
     public void openWindows(int sendID, int recID) {
         Friend friend = new Friend();
@@ -92,8 +97,10 @@ public class FWindows implements Windows{
             }
             if(result == 0 ) {
                 System.out.println("退出会话成功");
+                in.close();
                 return;
             }
+            in.close();
         }
 
     };

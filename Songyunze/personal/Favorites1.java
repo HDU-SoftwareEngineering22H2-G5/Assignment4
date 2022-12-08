@@ -1,4 +1,4 @@
-package com.wechat.personal;
+package Assignment4.Songyunze.personal;
 
 public class Favorites1 implements FavoritesPersonal{
 	String fsname="";

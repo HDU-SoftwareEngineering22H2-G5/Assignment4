@@ -1,3 +1,5 @@
+package Assignment4.Shiyongxin.src;
+
 import java.util.Scanner;
 
 public class GWindows {
@@ -29,11 +31,13 @@ public class GWindows {
         if (!groupPool.exist(id))
         {
             System.out.println("该群聊不存在");
+            in.close();
             return;
         }
         else if (!group.exist(id))
         {
             System.out.println("未加入该群聊");
+            in.close();
             return;
         }
 
@@ -43,6 +47,7 @@ public class GWindows {
         }
         arr[0] = id;
         this.openWindows(sendID, id);
+        in.close();
     };
     public void openWindows(int sendID, int recID) {
         Group group = new Group();
@@ -91,8 +96,10 @@ public class GWindows {
             }
             if(result == 0 ) {
                 System.out.println("退出群聊会话成功");
+                in.close();
                 return;
             }
+            in.close();
         }
 
     };

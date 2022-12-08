@@ -1,6 +1,4 @@
-import com.sun.nio.sctp.SendFailedNotification;
-
-import java.util.Date;
+package Assignment4.Shiyongxin.src;
 
 public interface Message {
     public void send(String text, int sendID, int recID);

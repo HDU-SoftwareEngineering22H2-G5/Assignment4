@@ -1,4 +1,4 @@
-package com.wechat.personal;
+package Assignment4.Songyunze.personal;
 
 public class WechatUser extends Observer{
 	public WechatUser(String name, FavoritesPersonal v1, InformationPersonal p1) {

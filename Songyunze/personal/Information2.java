@@ -1,4 +1,4 @@
-package com.wechat.personal;
+package Assignment4.Songyunze.personal;
 
 public class Information2 implements InformationPersonal {
 	String fsname="";
