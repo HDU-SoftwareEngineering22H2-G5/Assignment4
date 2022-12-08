@@ -7,7 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class WechatPay {
-    static void PayMain(){
+    public void PayMain(){
         Scanner s = new Scanner(System.in);
         int choose;
         boolean flag = true;
