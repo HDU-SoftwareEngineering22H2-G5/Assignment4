@@ -1,4 +1,4 @@
-package HDU_SE.Manziqi;
+package Assignment4.Manziqi;
 
 import java.util.*;
 

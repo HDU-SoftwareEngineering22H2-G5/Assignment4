@@ -1,6 +1,6 @@
-package HDU_SE;
+package Assignment4;
 
-import HDU_SE.Manziqi.subSystemMainPrompt;
+import Assignment4.Manziqi.subSystemMainPrompt;
 
 public class weChatSystem {
     public static void main(String[] args) {
