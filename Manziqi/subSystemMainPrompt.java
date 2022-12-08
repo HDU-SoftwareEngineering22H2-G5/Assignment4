@@ -13,6 +13,7 @@ public class subSystemMainPrompt {
             x = scan.nextInt();
         } catch (InputMismatchException e) {
             flag = true;
+            scan.next();
         }
         if(flag) return -1;
         else return x;
@@ -28,11 +29,13 @@ public class subSystemMainPrompt {
     public void promptMain() {
         int x = -1;
         while(x != 0) {
+            System.out.println();
             System.out.println("欢迎使用公众号系统!");
             System.out.println("请选择你的身份:");
             System.out.println("1. 运营机构");
             System.out.println("2. 用户");
             System.out.println("按0退出");
+            System.out.println();
             x = this.userInput();
             if(x == 1) {this.promptAgency();}
             else if(x == 2) {this.promptUser();}
@@ -44,21 +47,23 @@ public class subSystemMainPrompt {
     private void promptUser() {
         int x = -1;
         while(x != 0) {
+            System.out.println();
             System.out.println("您现在是:用户");
             System.out.println("请选择您要执行的操作");
             System.out.println("1. 订阅公众号");
             System.out.println("2. 退订公众号");
             System.out.println("3. 列出已订阅公众号");
             System.out.println("按0返回");
-            x = nextInt();
+            System.out.println();
+            x = userInput();
             if(x == 1) {
                 System.out.println("请输入公众号ID:");
-                x = nextInt();
+                x = userInput();
                 if(x == -1) break;
                 this.user.addSubscriptionAccount(x);
             } else if(x == 2) {
                 System.out.println("请输入公众号ID:");
-                x = nextInt();
+                x = userInput();
                 if(x == -1) break;
                 this.user.deleteSubscriptionAccount(x);
             } else if(x == 3) {
@@ -72,6 +77,7 @@ public class subSystemMainPrompt {
         int x = -1; 
         String name = "";
         while(x != 0) {
+            System.out.println();
             System.out.println("您现在是:运营机构");
             System.out.println("请选择您要执行的操作");
             System.out.println("1. 创建公众号");
@@ -80,33 +86,34 @@ public class subSystemMainPrompt {
             System.out.println("4. 创建推文");
             System.out.println("5. 删除推文");
             System.out.println("按0返回");
-            x = nextInt();
+            System.out.println();
+            x = userInput();
             if(x == 1) {
                 System.out.println("请输入公众号ID:");
-                x = nextInt();
+                x = userInput();
                 if(x == -1) break;
                 System.out.println("请输入公众号名称:");
                 name = scan.next();
                 this.agency.createSubscriptionAccount(x, name);
             } else if(x == 2) {
                 System.out.println("请输入公众号ID:");
-                x = nextInt();
+                x = userInput();
                 if(x == -1) break;
                 this.agency.stopSubscriptionAccount(x);
             } else if(x == 3) {
                 this.agency.listSubscriptionAccount();
             } else if(x == 4) {
                 System.out.println("请输入公众号ID:");
-                x = nextInt();
+                x = userInput();
                 if(x == -1) break;
-                System.out.println("请输入公众号名称:");
+                System.out.println("请输入推文内容:");
                 name = scan.next();
                 this.agency.createArticle(x, name);
             } else if(x == 5) {
                 System.out.println("请输入公众号ID:");
-                x = nextInt();
+                x = userInput();
                 if(x == -1) break;
-                System.out.println("请输入公众号名称:");
+                System.out.println("请输入推文内容:");
                 name = scan.next();
                 this.agency.deleteArticle(x, name);
             } else if(x == 0) {
@@ -132,6 +139,11 @@ class subscriptionOperator {
         if(!this.hasSubAccount(accountId)) return false;
         else return subscriptionContext.getInstance().
                         getAccountById(accountId).hasArticle(artName);
+    }
+    public boolean getAccountState(int accountId) {
+        if(!this.hasSubAccount(accountId)) return false;
+        else return subscriptionContext.getInstance().
+                        getAccountById(accountId).getState();
     }
     public boolean addUserToAccount(int accountId) {
         boolean flag = false;
@@ -211,21 +223,30 @@ class subscriptionOperator {
         while(iterator.hasNext()) {
             subscriptionAccount account = iterator.next();
             System.out.println("" + x + ".");
+            x = x + 1;
             account.Print();
         }
-        System.out.println("输出完成.");
+        System.out.println("\n输出完成.");
     }
     
 }
 class User {
     private Vector<Integer> subscriptionList ;
+    public User() {
+        subscriptionList = new Vector<Integer>();
+    }
     private boolean hasSubAccount(int x) {
         return subscriptionOperator.getInstance().hasSubAccount(x);
+    }
+    private boolean getAccountState(int x) {
+        return subscriptionOperator.getInstance().getAccountState(x);
     }
     public boolean addSubscriptionAccount(int x) {
         boolean result = false;
         Integer i = new Integer(x);
-        if(this.hasSubAccount(x) && !subscriptionList.contains(i)) {
+        if(this.hasSubAccount(x) && 
+            !subscriptionList.contains(i) && 
+                this.getAccountState(x)) {
             subscriptionList.add(i);
             Collections.sort(subscriptionList);
             subscriptionOperator.getInstance().addUserToAccount(x);
@@ -255,7 +276,7 @@ class User {
         if(!subscriptionList.isEmpty()) {
             Iterator<Integer> iterator = subscriptionList.iterator();
             while(iterator.hasNext()) {
-                System.out.println("公众号" + iterator.next() + ".");
+                System.out.println("公众号ID: " + iterator.next() + ".");
             }
             result = true;
         } else {
@@ -330,7 +351,9 @@ class subscriptionContext {
     private static class subscriptionContextHolder {
         private static subscriptionContext instance = new subscriptionContext();
     }
-    private subscriptionContext() {}
+    private subscriptionContext() {
+        accountList = new Vector<subscriptionAccount>();
+    }
     public static subscriptionContext getInstance() {
         return subscriptionContextHolder.instance;
     }
@@ -347,7 +370,7 @@ class subscriptionContext {
         Iterator<subscriptionAccount> iterator = accountList.iterator();
         while(iterator.hasNext()) {
             subscriptionAccount account = iterator.next();
-            if(account.ID == integer) {
+            if(account.ID.intValue() == integer.intValue()) {
                 result = account;
                 break;
             }
@@ -359,8 +382,8 @@ class subscriptionContext {
         Integer integer = new Integer(x);
         Iterator<subscriptionAccount> iterator = accountList.iterator();
         while(iterator.hasNext()) {
-            IDHolder idHolder = iterator.next();
-            if(idHolder.ID == integer) {
+            subscriptionAccount account = iterator.next();
+            if(account.ID.intValue() == integer.intValue()) {
                 result = true;
                 break;
             }
@@ -372,6 +395,12 @@ class subscriptionContext {
         if(!this.hasSubAccount(x)) {
             subscriptionAccount account = new subscriptionAccount(x, accName);
             accountList.add(account);
+            Collections.sort(accountList, new Comparator<subscriptionAccount>() {
+                @Override
+                public int compare(subscriptionAccount sa1, subscriptionAccount sa2) {
+                    return sa1.ID.intValue() - sa2.ID.intValue();
+                }
+            });
             result = true;
         } else {
             result = false;
@@ -394,27 +423,30 @@ interface Observer {
     boolean unlisten();
     boolean remind();
 }
-abstract class IDHolder{
-    public Integer ID;
-}
-class subscriptionAccount extends IDHolder implements Observer{
+class subscriptionAccount implements Observer{
     private Vector<String> articleList;
     public Integer ID;
     public Date createDate;
     public String Name;
     private boolean onObserve;
     private boolean onActive;
-    public subscriptionAccount(Integer id, Date date, String name) {
-        this.ID = id; this.createDate = date; this.Name = name;
+    private subscriptionAccount(String name) {
+        super();
+        this.Name = name;
         this.onObserve = false; this.onActive = true;
+        articleList = new Vector<String>();
+    }
+    public subscriptionAccount(Integer id, Date date, String name) {
+        this(name);
+        this.ID = id; this.createDate = date; 
     }
     public subscriptionAccount(int id, String name) {
-        this.ID = new Integer(id); this.createDate = new Date(); this.Name = name;
-        this.onObserve = false; this.onActive = true;
+        this(name);
+        this.ID = new Integer(id); this.createDate = new Date(); 
     }
     public subscriptionAccount(Integer id, String name) {
-        this.ID = id; this.createDate = new Date(); this.Name = name;
-        this.onObserve = false; this.onActive = true;
+        this(name);
+        this.ID = id; this.createDate = new Date(); 
     }
     @Override
     public boolean remind() {
@@ -437,11 +469,12 @@ class subscriptionAccount extends IDHolder implements Observer{
     }
     public boolean addArticle(String artName) {
         boolean result = false;
-        if(!this.hasArticle(artName)) {
+        if(!this.hasArticle(artName) && this.getState()) {
             articleList.add(artName);
+            this.remind();
             result = true;
         } else {
-            System.out.println("已有此文章!");
+            System.out.println("推文添加失败!");
             result = false;
         }
         return result;
@@ -452,7 +485,7 @@ class subscriptionAccount extends IDHolder implements Observer{
             articleList.remove(artName);
             result = true;
         } else {
-            System.out.println("无此文章!");
+            System.out.println("无此推文!");
             result = false;
         }
         return result;
