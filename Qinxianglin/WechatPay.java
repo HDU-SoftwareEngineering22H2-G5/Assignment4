@@ -1,4 +1,4 @@
-package wechatPay;
+package Assignment4.Qinxianglin;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
