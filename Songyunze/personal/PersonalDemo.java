@@ -1,7 +1,7 @@
-package com.wechat.personal;
+package Assignment4.Songyunze.personal;
 
 public class PersonalDemo {
- public static void main(String[] args){  
+ public void main(){  
 	   AbstractPersonal a=PersonalProducer.getPersonal("FavoritesPersonal");
 	   FavoritesPersonal b=a.getFavoritesPersonal("Favorites1");
 	   AbstractPersonal d=PersonalProducer.getPersonal("InformationPersonal");

@@ -1,5 +1,5 @@
 package Assignment4.Shiyongxin.src;
-import javax.sql.rowset.spi.SyncResolver;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -166,7 +166,7 @@ public class Chat {
                     }
                     break;
                 case 4:
-                    String ent = in.nextLine();
+                    in.nextLine();
                     System.out.println("请输入要查询的信息");
                     String str = in.nextLine();
                     if (str.matches("[0-9]+"))

@@ -1,4 +1,4 @@
-package wechatPay;
+package Assignment4.Qinxianglin;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
@@ -7,10 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class WechatPay {
-    public static void main(String[] args) {
-        PayMain();
-    }
-    static void PayMain(){
+    public void PayMain(){
         Scanner s = new Scanner(System.in);
         int choose;
         boolean flag = true;
@@ -36,7 +33,7 @@ public class WechatPay {
                     break;
             }
         }
-
+         
     }
     static void bank_card(){
         getIsBind g = new getIsBind();
@@ -86,7 +83,7 @@ public class WechatPay {
             }
         }
 
-
+         
     }
     static void card_withdraw(){
         System.out.println("=========银行卡提现========");
@@ -122,6 +119,7 @@ public class WechatPay {
                     break;
             }
         }
+         
     }
     static void card_recharge(){
         System.out.println("=========银行卡充值========");
@@ -157,6 +155,7 @@ public class WechatPay {
                     break;
             }
         }
+         
     }
     static void card_bind(){
         System.out.println("=========银行卡绑定========");
@@ -190,6 +189,7 @@ public class WechatPay {
                     break;
             }
         }
+         
     }
     static void card_unbind(){
         System.out.println("=========银行卡解绑========");
@@ -223,6 +223,7 @@ public class WechatPay {
                     break;
             }
         }
+         
     }
     static void chooseGoods(){
         Scanner s = new Scanner(System.in);
@@ -258,6 +259,7 @@ public class WechatPay {
                     break;
             }
         }
+         
     }
     static mer chooseMers(){
         System.out.println("============选择商家=============");
@@ -282,6 +284,7 @@ public class WechatPay {
                     break;
             }
         }
+         
         return null;
     }
     static boolean choosePaytool(){
@@ -320,6 +323,7 @@ public class WechatPay {
                     break;
             }
         }
+         
         return false;
     }
 }
@@ -441,10 +445,12 @@ class change implements paytool{
             if(checkPsw(p)){
                 System.out.printf("成功支付%.2f元\n", cost);
                 balance=balance-cost;
+                 
                 return true;
             }else{
                 System.out.printf("密码错误\n");
             }
+             
         }
         return false;
     }
@@ -525,11 +531,13 @@ class bank1 implements BankCard{
                 }else{
                     System.out.printf("成功支付%.2f元\n", cost);
                     balance=balance-cost;
+                     
                     return true;
                 }
             }else{
                 System.out.printf("密码错误\n");
             }
+             
         }else {
             System.out.printf("请先绑定银行卡\n");
         }
@@ -554,6 +562,7 @@ class bank1 implements BankCard{
             }else{
                 System.out.printf("密码错误！\n");
             }
+             
         }else{
             System.out.printf("请先绑定银行卡\n");
         }
@@ -574,6 +583,7 @@ class bank1 implements BankCard{
             }else{
                 System.out.printf("密码错误！\n");
             }
+             
         }else {
             System.out.printf("请先绑定银行卡\n");
         }
@@ -599,9 +609,11 @@ class bank1 implements BankCard{
                 System.out.printf("bank1解绑成功\n");
             }
             isBind=true;
+             
             return true;
         }else{
             System.out.printf("密码错误！\n");
+             
             return false;
         }
     }
@@ -631,11 +643,13 @@ class bank2 implements BankCard{
                 }else{
                     System.out.printf("成功支付%.2f元\n", cost);
                     balance=balance-cost;
+                     
                     return true;
                 }
             }else{
                 System.out.printf("密码错误\n");
             }
+             
         }else{
             System.out.printf("请先绑定bank2银行卡\n");
         }
@@ -660,6 +674,7 @@ class bank2 implements BankCard{
             }else{
                 System.out.printf("密码错误！\n");
             }
+             
         }else {
             System.out.printf("请先绑定银行卡\n");
         }
@@ -680,6 +695,7 @@ class bank2 implements BankCard{
             }else{
                 System.out.printf("密码错误！\n");
             }
+             
         }else {
             System.out.printf("请先绑定银行卡\n");
         }
@@ -705,9 +721,11 @@ class bank2 implements BankCard{
                 System.out.printf("bank2解绑成功\n");
             }
             isBind=true;
+             
             return true;
         }else{
             System.out.printf("密码错误！\n");
+             
             return false;
         }
     }

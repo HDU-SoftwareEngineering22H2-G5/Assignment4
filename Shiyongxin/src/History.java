@@ -1,8 +1,9 @@
+package Assignment4.Shiyongxin.src;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Scanner;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 public class History {
@@ -17,6 +18,7 @@ public class History {
             lines.forEach(ele -> {
                 System.out.println(ele);
             });
+            lines.close();
         }catch (IOException io){
             io.printStackTrace();
         }
@@ -41,6 +43,7 @@ public class History {
                 lines.forEach(ele -> {
                     System.out.println(ele);
                 });
+                lines.close();
             }
             else
             {
@@ -54,6 +57,8 @@ public class History {
                     }
                 }
             }
+            sc.close();
+            reader.close();
         }catch (IOException io){
             io.printStackTrace();
         }
@@ -67,6 +72,7 @@ public class History {
             PrintWriter pw = new PrintWriter(fw);
             pw.println(mes);
             pw.flush();
+            pw.close();
         }catch (IOException io){
             io.printStackTrace();
         }

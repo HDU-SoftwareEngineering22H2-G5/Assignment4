@@ -1,4 +1,4 @@
-package com.wechat.personal;
+package Assignment4.Songyunze.personal;
 
 public abstract class Observer {
 	public FavoritesPersonal subFavorites1;

@@ -1,5 +1,4 @@
-import java.util.HashMap;
-import java.util.Map;
+package Assignment4.Shiyongxin.src;
 
 public interface Contact {
 
